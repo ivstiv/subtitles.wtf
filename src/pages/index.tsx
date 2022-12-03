@@ -1,5 +1,7 @@
+import { Flex } from "@mantine/core";
 import { type NextPage } from "next";
 import Head from "next/head";
+import { Logo } from "../components/Logo";
 import { StepperLayout } from "../components/stepper";
 
 
@@ -14,7 +16,22 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <StepperLayout></StepperLayout>
+        <Flex
+          justify="center"
+          align="center"
+          gap="xl"
+          wrap={{
+            lg:"nowrap",
+            xs:"wrap"
+          }}
+          sx={{
+            margin: "2rem",
+            flexWrap: "wrap",
+          }}
+        >
+          <Logo/>
+          <StepperLayout/>
+        </Flex>
       </main>
     </>
   );
