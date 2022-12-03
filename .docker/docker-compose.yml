@@ -1,0 +1,26 @@
+version: '3'
+networks:
+  subtitles-network:
+    driver: bridge
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    user: $currentUser:$currentGroup
+    image: subtitles-dev
+    container_name: subtitles-dev
+    stdin_open: true
+    tty: true
+    command: sh -c "[ ! -d node_modules ] && npm i; npm run dev"
+    volumes:
+      - $sshAgentPath:/ssh-agent
+      - ../:/app
+      - ~/.gitconfig:/home/node/.gitconfig
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    ports:
+      - 3000:3000
+    networks:
+      - subtitles-network
