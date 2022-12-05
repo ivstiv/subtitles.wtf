@@ -1,6 +1,6 @@
 import { type AppType } from "next/app";
-import Head from 'next/head';
-import { MantineProvider } from '@mantine/core';
+import Head from "next/head";
+import { MantineProvider } from "@mantine/core";
 import { trpc } from "../utils/trpc";
 
 
@@ -17,7 +17,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         withNormalizeCSS
         theme={{
           /** Put your mantine theme override here */
-          colorScheme: 'dark',
+          colorScheme: "dark",
         }}
       >
         <Component {...pageProps} />

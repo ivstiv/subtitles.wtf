@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Stepper, Button, Group } from '@mantine/core';
+import { useState } from "react";
+import { Stepper } from "@mantine/core";
 
 export const StepperLayout = () => {
   const [active, setActive] = useState(1);
@@ -11,17 +11,17 @@ export const StepperLayout = () => {
       <Stepper
         active={active}
         onStepClick={setActive}
-        sx={{ width: "100%" }}
-        breakpoint="xs"
+        sx={theme => ({
+          width: "fit-content",
+          [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
+            width: "100%",
+          },
+        })}
       >
-        <Stepper.Step label="Pick your movie">
-        </Stepper.Step>
-        <Stepper.Step label="Select language">
-        </Stepper.Step>
-        <Stepper.Step label="Get your snacks">
-        </Stepper.Step>
-        <Stepper.Completed>
-        </Stepper.Completed>
+        <Stepper.Step label="Pick your movie" />
+        <Stepper.Step label="Select language"/>
+        <Stepper.Step label="Get your snacks"/>
+        <Stepper.Completed> </Stepper.Completed>
       </Stepper>
 
       {/* <Group position="center" mt="xl">
@@ -30,4 +30,4 @@ export const StepperLayout = () => {
       </Group> */}
     </>
   );
-}
+};

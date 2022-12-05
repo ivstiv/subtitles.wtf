@@ -22,7 +22,7 @@ const Home: NextPage = () => {
           gap="xl"
           wrap={{
             lg:"nowrap",
-            xs:"wrap"
+            xs:"wrap",
           }}
           sx={{
             margin: "2rem",

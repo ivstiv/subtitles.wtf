@@ -1,29 +1,23 @@
-import { Box } from "@mantine/core"
-import Image from "next/image"
+import { Box } from "@mantine/core";
+import Image from "next/image";
+import logoImg from "../assets/images/logo.png";
 
 export const Logo = () => {
-    return (
-      <Box
-        sx={{
-          xs: {
-            width: "35%"
-          }
-        }}
-      >
-        <Image
-          unoptimized
-          src="/images/logo.png"
-          alt="Logo"
-          width="635"
-          height="158"
-          priority={true}
-          // sizes="(max-width: 768px) 100vw,
-          //   (max-width: 1200px) 50vw,
-          //   33vw"
-          style={{
-            objectFit: "cover",
-          }}
-        />
-      </Box>
-    )
-}
+  return (
+    <Box
+      sx={theme => ({
+        width: "100%",
+        [`@media (min-width: ${theme.breakpoints.lg}px)`]: {
+          width: "40%",
+        },
+      })}
+    >
+      <Image
+        src={logoImg}
+        alt="Logo"
+        priority={true}
+        style={{ height: "100%", width:"100%" }}
+      />
+    </Box>
+  );
+};
