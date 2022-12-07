@@ -1,5 +1,6 @@
 # subtitles.wtf
 
+- bundle analyzer
 - move relevant stuff from old readme
 - build guide
 - dev guide

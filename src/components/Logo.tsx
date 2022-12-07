@@ -7,7 +7,7 @@ export const Logo = () => {
     <Box
       sx={theme => ({
         width: "100%",
-        [`@media (min-width: ${theme.breakpoints.lg}px)`]: {
+        [`@media (min-width: ${theme.breakpoints.md}px)`]: {
           width: "40%",
         },
       })}
