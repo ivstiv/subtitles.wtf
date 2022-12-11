@@ -17,5 +17,5 @@ export const CurrentStep = () => {
     throw new Error("Missing context provider for AppContext!");
   }
 
-  return stepComponents[context.step];
+  return stepComponents.at(context.step) ?? <>Something went wrong</>;
 };
