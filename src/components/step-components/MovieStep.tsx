@@ -1,11 +1,11 @@
-import { Button, Card, Center, FocusTrap, Group, ScrollArea, Space, Text, TextInput, Title } from "@mantine/core";
-import { useCallback, useContext, useRef, useState } from "react";
+import { Button, Card, Center, FocusTrap, Group, Space, Text, TextInput, Title } from "@mantine/core";
+import { useContext, useState } from "react";
 import { AppContext } from "../AppContext";
 import { useForm } from "@mantine/form";
 import { IconMovie } from "@tabler/icons";
 import { trpc } from "../../utils/trpc";
-import { MovieCard } from "../MovieCard";
 import { useScrollIntoView } from "@mantine/hooks";
+import { MovieResults } from "../MovieResults";
 
 
 export const MovieStep = () => {
@@ -15,7 +15,6 @@ export const MovieStep = () => {
   }
 
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>();
-  const resultsRef = useRef<HTMLDivElement>(null);
 
   const [searchQuery, setSearchQuery] = useState("");
   const movies = trpc.example.getMovie.useQuery({ searchQuery }, {
@@ -23,25 +22,8 @@ export const MovieStep = () => {
     staleTime: Infinity,
     onSuccess: () => {
       scrollIntoView();
-      setInterval(() => {
-        if(resultsRef.current) {
-          if(resultsRef.current.scrollWidth > resultsRef.current.scrollLeft) {
-            resultsRef.current.scrollTo({
-              behavior: "auto",
-              left: resultsRef.current.scrollLeft + 1,
-            });
-          }
-        }
-      }, 20);
     },
   });
-
-  const selectMovie = useCallback((id: string) => {
-    context.setMovie(id);
-    context.setStep(prev => prev+1);
-  }, [context]);
-
-  console.log("movies", movies.data);
 
   const form = useForm({
     initialValues: {
@@ -102,21 +84,9 @@ export const MovieStep = () => {
       <Center>
         <Title ref={targetRef} opacity={!!movies.data ? 1 : 0}>Pick your movie</Title>
       </Center>
-      <ScrollArea
-        viewportRef={resultsRef}
-        mt="md"
-        style={{ width: "100%", height: "fit-content" }}
-      >
-        <Group noWrap sx={{ marginLeft: "200px" }}>
-          {movies.data?.map((movie, i) => (
-            <MovieCard
-              key={`${movie.imdbID}-${i}`}
-              movie={movie}
-              onSelect={selectMovie}
-            />
-          ))}
-        </Group>
-      </ScrollArea>
+      {!!movies.data && movies.data?.length > 0 &&
+          <MovieResults movies={movies.data}/>
+      }
     </>
   );
 };
