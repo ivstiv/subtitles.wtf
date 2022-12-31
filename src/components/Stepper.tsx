@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { Stepper as MantineStepper } from "@mantine/core";
 import { AppContext } from "./AppContext";
 
@@ -10,12 +10,25 @@ export const Stepper = () => {
     throw new Error("Missing context provider for AppContext!");
   }
 
+  const changeStep = useCallback((step: number) => {
+    // can't go to language if movie is not selected
+    if(step === 1 && !context.imdbID) {
+      return;
+    }
+
+    // can't go to subtitles without movie and language
+    if(step === 2 && (!context.imdbID || !context.languages)) {
+      return;
+    }
+
+    context.setStep(step);
+  }, [context]);
+
   return (
     <>
       <MantineStepper
         active={context.step}
-        // TO-DO: make sure user can't click on langs or subs without previous data
-        onStepClick={context.setStep}
+        onStepClick={changeStep}
         sx={theme => ({
           width: "fit-content",
           [`@media (min-width: ${theme.breakpoints.xs}px)`]: {

@@ -14,7 +14,7 @@ export type AppContext = {
 
 export const AppContext = createContext<AppContext | null>(null);
 
-
+// TO-DO: pre-load the context from url params
 type Props = { children: JSX.Element | JSX.Element[] }
 export const AppContextProvider: FC<Props> = ({ children }) => {
   const [step, setStep] = useState(0);
