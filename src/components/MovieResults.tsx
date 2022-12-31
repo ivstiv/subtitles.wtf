@@ -3,7 +3,7 @@ import type { FC, MouseEvent, TouchEvent } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useCallback, useContext, useRef } from "react";
-import type { OMDBMovieType } from "../server/trpc/router/example";
+import type { OMDBMovieType } from "../server/trpc/router/movies";
 import { AppContext } from "./AppContext";
 import { MovieCard } from "./MovieCard";
 
@@ -19,7 +19,7 @@ export const MovieResults: FC<Props> = ({ movies }) => {
   }
 
   const selectMovie = useCallback((id: string) => {
-    context.setMovie(id);
+    context.setImdbID(id);
     context.setStep(prev => prev+1);
   }, [context]);
 

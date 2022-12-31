@@ -1,11 +1,23 @@
-import { Button, Card, Center, FocusTrap, Group, Space, Text, TextInput, Title } from "@mantine/core";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { useForm } from "@mantine/form";
 import { IconMovie } from "@tabler/icons";
 import { trpc } from "../../utils/trpc";
 import { useScrollIntoView } from "@mantine/hooks";
 import { MovieResults } from "../MovieResults";
+import {
+  Button,
+  Card,
+  Center,
+  FocusTrap,
+  Group,
+  Space,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
+
+
 
 
 export const MovieStep = () => {
@@ -16,15 +28,6 @@ export const MovieStep = () => {
 
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>();
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const movies = trpc.example.getMovie.useQuery({ searchQuery }, {
-    enabled: !!searchQuery,
-    staleTime: Infinity,
-    onSuccess: () => {
-      scrollIntoView();
-    },
-  });
-
   const form = useForm({
     initialValues: {
       searchQuery: "",
@@ -33,6 +36,25 @@ export const MovieStep = () => {
       searchQuery: value => value.length ? null : "You must specify a movie!",
     },
   });
+
+  const movies = trpc.movies.getMovie.useQuery({
+    searchQuery: form.values.searchQuery,
+  }, {
+    enabled: false,
+    staleTime: Infinity,
+    onSuccess: () => {
+      scrollIntoView();
+    },
+    onError: err => {
+      // backend errors are json encoded..
+      // TO-DO: how do we parse this safely?
+      form.setFieldError("searchQuery", JSON.parse(err.message)[0].message);
+    },
+  });
+
+  // TO-DO: show selected movie here, may be add a new endpoint
+  // fetch some movie data
+  // may be swap between a movie details card and the search component
 
   return(
     <>
@@ -49,23 +71,27 @@ export const MovieStep = () => {
         >
           <FocusTrap active={true}>
             <form
-              onSubmit={form.onSubmit(({ searchQuery }) => {
-                setSearchQuery(searchQuery);
+              onSubmit={form.onSubmit(() => {
+                movies.refetch();
               })}
             >
               <TextInput
                 size="lg"
-                withAsterisk
-                labelProps={{
-                  size: "lg",
-                }}
-                label="Find your movie"
+                name="movie"
                 placeholder="Movie title..."
                 {...form.getInputProps("searchQuery")}
-                icon={<IconMovie size={18} />}
+                icon={<IconMovie/>}
               />
               <Group position="apart" mt="md" sx={{ flexDirection: "row-reverse" }}>
-                <Button type="submit" size="lg">Search</Button>
+                <Button
+                  type="submit"
+                  size="lg"
+                  variant="gradient"
+                  loading={movies.isFetching}
+                  disabled={movies.isFetching}
+                >
+                  Search
+                </Button>
                 <Text
                   sx={theme => ({
                     fontSize: theme.fontSizes.md,
@@ -74,7 +100,8 @@ export const MovieStep = () => {
                     },
                   })}
                 >
-                  Search powered by <a href="https://www.omdbapi.com/" target="_blank" rel="noreferrer">OMDb API</a>.</Text>
+                  Search powered by <a href="https://www.omdbapi.com/" target="_blank" rel="noreferrer">OMDb API</a>.
+                </Text>
               </Group>
             </form>
           </FocusTrap>

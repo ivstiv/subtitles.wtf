@@ -14,6 +14,7 @@ export const Stepper = () => {
     <>
       <MantineStepper
         active={context.step}
+        // TO-DO: make sure user can't click on langs or subs without previous data
         onStepClick={context.setStep}
         sx={theme => ({
           width: "fit-content",

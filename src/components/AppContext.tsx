@@ -5,8 +5,10 @@ import { createContext } from "react";
 export type AppContext = {
   step: number
   setStep: Dispatch<SetStateAction<number>>
-  movie: string
-  setMovie: Dispatch<SetStateAction<string>>
+  imdbID: string
+  setImdbID: Dispatch<SetStateAction<string>>
+  languages: string
+  setLanguages: Dispatch<SetStateAction<string>>
 }
 
 
@@ -16,11 +18,13 @@ export const AppContext = createContext<AppContext | null>(null);
 type Props = { children: JSX.Element | JSX.Element[] }
 export const AppContextProvider: FC<Props> = ({ children }) => {
   const [step, setStep] = useState(0);
-  const [movie, setMovie] = useState("");
+  const [imdbID, setImdbID] = useState("");
+  const [languages, setLanguages] = useState("");
 
   const contextValue = {
     step, setStep,
-    movie, setMovie,
+    imdbID, setImdbID,
+    languages, setLanguages,
   };
 
   return (

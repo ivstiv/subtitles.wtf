@@ -18,6 +18,8 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         theme={{
           /** Put your mantine theme override here */
           colorScheme: "dark",
+          defaultRadius: "lg",
+          loader: "bars",
         }}
       >
         <Component {...pageProps} />

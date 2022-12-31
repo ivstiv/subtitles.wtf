@@ -1,7 +1,7 @@
 import { Badge, Button, Card, Group, Text } from "@mantine/core";
 import Image from "next/image";
 import type { FC } from "react";
-import type { OMDBMovieType } from "../server/trpc/router/example";
+import type { OMDBMovieType } from "../server/trpc/router/movies";
 
 type Props ={
   movie: OMDBMovieType
