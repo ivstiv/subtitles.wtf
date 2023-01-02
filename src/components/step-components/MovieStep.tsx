@@ -5,9 +5,9 @@ import { IconMovie } from "@tabler/icons";
 import { trpc } from "../../utils/trpc";
 import { useScrollIntoView } from "@mantine/hooks";
 import { MovieResults } from "../MovieResults";
+import { CenteredCard } from "../ui-elements/CenteredCard";
 import {
   Button,
-  Card,
   Center,
   FocusTrap,
   Group,
@@ -58,55 +58,44 @@ export const MovieStep = () => {
 
   return(
     <>
-      <Group position="center">
-        <Card
-          p="lg"
-          withBorder
-          sx={theme => ({
-            width: "90%",
-            [`@media (min-width: ${theme.breakpoints.md}px)`]: {
-              width: "50%",
-            },
-          })}
-        >
-          <FocusTrap active={true}>
-            <form
-              onSubmit={form.onSubmit(() => {
-                movies.refetch();
-              })}
-            >
-              <TextInput
+      <CenteredCard maxWidth="50%">
+        <FocusTrap active={true}>
+          <form
+            onSubmit={form.onSubmit(() => {
+              movies.refetch();
+            })}
+          >
+            <TextInput
+              size="lg"
+              name="movie"
+              placeholder="Movie title..."
+              {...form.getInputProps("searchQuery")}
+              icon={<IconMovie/>}
+            />
+            <Group position="apart" mt="md" sx={{ flexDirection: "row-reverse" }}>
+              <Button
+                type="submit"
                 size="lg"
-                name="movie"
-                placeholder="Movie title..."
-                {...form.getInputProps("searchQuery")}
-                icon={<IconMovie/>}
-              />
-              <Group position="apart" mt="md" sx={{ flexDirection: "row-reverse" }}>
-                <Button
-                  type="submit"
-                  size="lg"
-                  variant="gradient"
-                  loading={movies.isFetching}
-                  disabled={movies.isFetching}
-                >
+                variant="gradient"
+                loading={movies.isFetching}
+                disabled={movies.isFetching}
+              >
                   Search
-                </Button>
-                <Text
-                  sx={theme => ({
-                    fontSize: theme.fontSizes.md,
-                    [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-                      fontSize: theme.fontSizes.xs,
-                    },
-                  })}
-                >
-                  Search powered by <a href="https://www.omdbapi.com/" target="_blank" rel="noreferrer">OMDb API</a>.
-                </Text>
-              </Group>
-            </form>
-          </FocusTrap>
-        </Card>
-      </Group>
+              </Button>
+              <Text
+                sx={theme => ({
+                  fontSize: theme.fontSizes.md,
+                  [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+                    fontSize: theme.fontSizes.xs,
+                  },
+                })}
+              >
+                  Search powered by <a href="https://www.omdbapi.com/" target="_blank" rel="external noreferrer">OMDb API</a>.
+              </Text>
+            </Group>
+          </form>
+        </FocusTrap>
+      </CenteredCard>
       <Space h="md" />
       <Center>
         <Title ref={targetRef} opacity={!!movies.data ? 1 : 0}>Pick your movie</Title>

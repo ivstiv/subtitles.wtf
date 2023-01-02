@@ -1,9 +1,10 @@
-import { Button, Card, FocusTrap, Group, TextInput } from "@mantine/core";
+import { Button, FocusTrap, Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useFocusTrap } from "@mantine/hooks";
 import { useContext, useMemo, useState } from "react";
 import { languages } from "../../utils/languages";
 import { AppContext } from "../AppContext";
+import { CenteredCard } from "../ui-elements/CenteredCard";
 import { LanguageButton } from "../ui-elements/LanguageButton";
 
 
@@ -67,84 +68,73 @@ export const LanguageStep = () => {
 
 
   return (
-    <Group position="center">
-      <Card
-        p="lg"
-        withBorder
-        sx={theme => ({
-          width: "90%",
-          [`@media (min-width: ${theme.breakpoints.md}px)`]: {
-            width: "50%",
-          },
-        })}
-      >
-        <FocusTrap active={true}>
-          <form
-            onSubmit={form.onSubmit(({ languages }) => {
-              context.setLanguages(languages);
-              context.setStep(prev => prev+1);
-            })}
-          >
-            <Group position="apart">
-              <TextInput
-                ref={focusRef}
-                name="language"
-                size="lg"
-                placeholder="Filter languages..."
-                sx={{ flexGrow: 1 }}
-                {...form.getInputProps("languageInput")}
-                error={form.errors.languages}
-              />
-              <Button
-                type="submit"
-                size="lg"
-                variant="gradient"
-              >
+    <CenteredCard maxWidth="50%">
+      <FocusTrap active={true}>
+        <form
+          onSubmit={form.onSubmit(({ languages }) => {
+            context.setLanguages(languages);
+            context.setStep(prev => prev+1);
+          })}
+        >
+          <Group position="apart">
+            <TextInput
+              ref={focusRef}
+              name="language"
+              size="lg"
+              placeholder="Filter languages..."
+              sx={{ flexGrow: 1 }}
+              {...form.getInputProps("languageInput")}
+              error={form.errors.languages}
+            />
+            <Button
+              type="submit"
+              size="lg"
+              variant="gradient"
+            >
                 Show subtitles
-              </Button>
-            </Group>
+            </Button>
+          </Group>
 
-            <Group position="left" mt="md" sx={{ flexDirection: "row" }}>
-              {selectedLanguages.map(lang => (
-                <LanguageButton
-                  key={`${lang.code}-selected`}
-                  language={lang.code}
-                  isSelected={true}
-                  onPress={() => {
-                    const newLangs = form.values.languages
-                      .split(",")
-                      .filter(code => code !== lang.code);
-                    form.setValues({
-                      languages: newLangs.join(","),
-                    });
-                  }}
-                />
-              ))}
+          <Group position="left" mt="md" sx={{ flexDirection: "row" }}>
+            {selectedLanguages.map(lang => (
+              <LanguageButton
+                key={`${lang.code}-selected`}
+                language={lang.code}
+                isSelected={true}
+                onPress={() => {
+                  const newLangs = form.values.languages
+                    .split(",")
+                    .filter(code => code !== lang.code);
+                  form.setValues({
+                    languages: newLangs.join(","),
+                  });
+                }}
+              />
+            ))}
 
-              {filteredLanguages.slice(0, NUM_OF_SHOWN_LANGS).map(lang => (
-                <LanguageButton
-                  key={`${lang.code}-filtered`}
-                  language={lang.code}
-                  isSelected={false}
-                  onPress={() => {
-                    const isFirst = form.values.languages.length === 0;
-                    const newValue = isFirst ?
-                      lang.code : `${form.values.languages},${lang.code}`;
-                    form.setValues({
-                      languages: newValue,
-                    });
-                    form.setValues({ languageInput: "" });
-                    setShouldFocusOnInput(true);
-                  }}
-                />
-              ))}
-              {(filteredLanguages.length - NUM_OF_SHOWN_LANGS) > 0 &&
+            {filteredLanguages.slice(0, NUM_OF_SHOWN_LANGS).map(lang => (
+              <LanguageButton
+                key={`${lang.code}-filtered`}
+                language={lang.code}
+                isSelected={false}
+                onPress={() => {
+                  const isFirst = form.values.languages.length === 0;
+                  const newValue = isFirst ?
+                    lang.code : `${form.values.languages},${lang.code}`;
+                  form.setValues({
+                    languages: newValue,
+                  });
+                  form.setValues({ languageInput: "" });
+                  setShouldFocusOnInput(true);
+                }}
+              />
+            ))}
+            {(filteredLanguages.length - NUM_OF_SHOWN_LANGS) > 0 &&
               `+ ${(filteredLanguages.length - NUM_OF_SHOWN_LANGS)} more...`
-              }
-            </Group>
-          </form>
-        </FocusTrap>
-      </Card>
-    </Group>
+            }
+          </Group>
+        </form>
+      </FocusTrap>
+    </CenteredCard>
   );
 };
