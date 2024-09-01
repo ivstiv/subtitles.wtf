@@ -2,7 +2,7 @@ name: CI Check and Build
 
 on:
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   ci-check-and-build:
@@ -24,8 +24,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run ci-check
-        run: pnpm run ci-check
-
       - name: Build project
         run: pnpm run build
+        env:
+          OMDB_API_KEY: "dummy"
+          OPEN_SUBS_API_KEY: "dummy"
+
+      - name: Run ci-check
+        run: pnpm run ci-check
