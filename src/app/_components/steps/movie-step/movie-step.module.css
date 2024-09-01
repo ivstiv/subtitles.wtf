@@ -1,0 +1,19 @@
+.wrapper {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.omdb-text {
+  font-size: var(--mantine-font-size-sm);
+  @media (max-width: $mantine-breakpoint-xs) {
+    font-size: var(--mantine-font-size-xs);
+  }
+}
+
+.card {
+  width: 90%;
+  margin: 0 auto;
+  @media (min-width: $mantine-breakpoint-md) {
+    width: 50%;
+  }
+}

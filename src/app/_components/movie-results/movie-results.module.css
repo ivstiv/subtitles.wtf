@@ -1,0 +1,13 @@
+.wrapper-up {
+  margin-left: 200px;
+  cursor: auto;
+  transform: scale(0.99);
+  overflow: visible;
+}
+
+.wrapper-down {
+  margin-left: 200px;
+  cursor: grabbing;
+  transform: scale(1);
+  overflow: visible;
+}

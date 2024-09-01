@@ -1,0 +1,15 @@
+.card {
+  width: 90%;
+  margin: 0 auto;
+  @media (min-width: $mantine-breakpoint-md) {
+    width: 50%;
+  }
+}
+
+.language-input {
+  flex-grow: 1;
+}
+
+.languages-wrapper {
+  flex-direction: row;
+}

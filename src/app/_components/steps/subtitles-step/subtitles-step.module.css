@@ -1,0 +1,35 @@
+.card {
+  width: 90%;
+  margin: 0 auto;
+  @media (min-width: $mantine-breakpoint-md) {
+    width: 70%;
+  }
+}
+
+.subtitle-label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  @media (min-width: $mantine-breakpoint-md) {
+    width: 50%;
+  }
+  word-break: break-all;
+}
+
+.top-controls {
+  width: 90%;
+  @media (min-width: $mantine-breakpoint-md) {
+    width: 70%;
+  }
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.os-text {
+  text-align: center;
+  width: 100%;
+  font-size: var(--mantine-font-size-sm);
+  @media (max-width: $mantine-breakpoint-xs) {
+    font-size: var(--mantine-font-size-xs);
+  }
+}

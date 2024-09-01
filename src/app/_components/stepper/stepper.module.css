@@ -1,0 +1,6 @@
+.stepper {
+  width: fit-content;
+  @media (min-width: $mantine-breakpoint-xs) {
+    width: 100%;
+  }
+}
