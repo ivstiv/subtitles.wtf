@@ -12,7 +12,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-__Check package.json for other scripts__
+**Check package.json for other scripts.**
 
 ## Links
 

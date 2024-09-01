@@ -21,7 +21,7 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
-export const theme = createTheme({
+const theme = createTheme({
   /** Put your mantine theme override here */
   radius: {
     xs: "16px",
