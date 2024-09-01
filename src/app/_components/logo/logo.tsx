@@ -1,6 +1,6 @@
 import { Box } from "@mantine/core";
 import Image from "next/image";
-import logoImg from "~/assets/logo.png";
+import logoImg from "../../../assets/logo.png";
 import classes from "./logo.module.css";
 
 export const Logo = () => {
