@@ -26,6 +26,9 @@ jobs:
 
       - name: Build project
         run: pnpm run build
+        env:
+          OMDB_API_KEY: "dummy"
+          OPEN_SUBS_API_KEY: "dummy"
 
       - name: Run ci-check
         run: pnpm run ci-check
