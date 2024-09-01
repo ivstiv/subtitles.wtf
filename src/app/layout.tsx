@@ -7,6 +7,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { MantineProvider, ColorSchemeScript, createTheme } from "@mantine/core";
 import { AppContextProvider } from "~/data/app-context";
 import { Poppins } from "next/font/google";
+import { Footer } from "./_components/footer/footer";
 
 export const metadata: Metadata = {
   title: "Where To Find Subtitles?",
@@ -83,6 +84,7 @@ export default function RootLayout({
         <TRPCReactProvider>
           <MantineProvider theme={theme} defaultColorScheme="dark">
             <AppContextProvider>{children}</AppContextProvider>
+            <Footer />
           </MantineProvider>
         </TRPCReactProvider>
       </body>
