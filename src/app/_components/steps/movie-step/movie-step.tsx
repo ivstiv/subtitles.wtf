@@ -42,10 +42,19 @@ export const MovieStep = () => {
   );
 
   useEffect(() => {
+    if (movies.data !== undefined) {
+      if (movies.data.length === 0) {
+        form.setFieldError(
+          "searchQuery",
+          "Couldn't find the movie you are looking for!",
+        );
+      }
+    }
+
     if (movies.data) {
       scrollIntoView();
     }
-  }, [movies.data, scrollIntoView]);
+  }, [movies.data, scrollIntoView, form]);
 
   useEffect(() => {
     if (movies.error) {
@@ -96,7 +105,10 @@ export const MovieStep = () => {
       </Card>
       <Space h="md" />
       <Center>
-        <Title ref={targetRef} opacity={!!movies.data ? 1 : 0}>
+        <Title
+          ref={targetRef}
+          opacity={!!movies.data && movies.data.length > 0 ? 1 : 0}
+        >
           Pick your movie
         </Title>
       </Center>
