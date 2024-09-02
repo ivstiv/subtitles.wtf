@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: "Where To Find Subtitles?",
   description: "Where to find subtitles for your favorite movies and TV shows?",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  keywords: ["subtitles", "movies", "tv shows", "streaming", "download"],
 };
 
 const poppins = Poppins({

@@ -46,27 +46,27 @@ export const SubtitlesStep = () => {
         </Anchor>
         .
       </Text>
-      <Group className={classes["top-controls"]}>
-        <Switch
-          size="lg"
-          label="AI Generated"
-          mt="sm"
-          checked={includeAITranslated}
-          onChange={(event) =>
-            setIncludeAITranslated(event.currentTarget.checked)
-          }
-        />
-        {subs.isFetching && <Loader />}
-        <Pagination
-          total={subs.data?.total_pages ?? 0}
-          value={subs.data?.page ?? 0}
-          onChange={setPage}
-          mt="sm"
-        />
-      </Group>
+      <ResultControls
+        includeAITranslated={includeAITranslated}
+        setIncludeAITranslated={setIncludeAITranslated}
+        totalPages={subs.data?.total_pages ?? 0}
+        currentPage={subs.data?.page ?? 0}
+        setPage={setPage}
+        isFetching={subs.isFetching}
+      />
       {subs.data?.data.map((entry) => (
         <SubtitleResult key={entry.id} entry={entry} />
       ))}
+      {(subs.data?.total_count ?? 0) > 10 && (
+        <ResultControls
+          includeAITranslated={includeAITranslated}
+          setIncludeAITranslated={setIncludeAITranslated}
+          totalPages={subs.data?.total_pages ?? 0}
+          currentPage={subs.data?.page ?? 0}
+          setPage={setPage}
+          isFetching={subs.isFetching}
+        />
+      )}
     </Group>
   );
 };
@@ -93,6 +93,45 @@ const ErrorCard = ({ error }: ErrorCardProps) => {
         so it can be fixed.
         <Text>Error: {error}</Text>
       </Alert>
+    </Group>
+  );
+};
+
+interface ResultControlsProps {
+  includeAITranslated: boolean;
+  setIncludeAITranslated: (value: boolean) => void;
+  totalPages: number;
+  currentPage: number;
+  setPage: (page: number) => void;
+  isFetching: boolean;
+}
+
+const ResultControls = ({
+  includeAITranslated,
+  setIncludeAITranslated,
+  totalPages,
+  currentPage,
+  setPage,
+  isFetching,
+}: ResultControlsProps) => {
+  return (
+    <Group className={classes["top-controls"]}>
+      <Switch
+        size="lg"
+        label="AI Generated"
+        mt="sm"
+        checked={includeAITranslated}
+        onChange={(event) =>
+          setIncludeAITranslated(event.currentTarget.checked)
+        }
+      />
+      {isFetching && <Loader />}
+      <Pagination
+        total={totalPages}
+        value={currentPage}
+        onChange={setPage}
+        mt="sm"
+      />
     </Group>
   );
 };
