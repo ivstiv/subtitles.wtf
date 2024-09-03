@@ -60,6 +60,9 @@ importers:
         specifier: ^3.23.3
         version: 3.23.8
     devDependencies:
+      '@total-typescript/ts-reset':
+        specifier: ^0.6.1
+        version: 0.6.1
       '@types/eslint':
         specifier: ^8.56.10
         version: 8.56.11
@@ -408,6 +411,9 @@ packages:
     resolution: {integrity: sha512-soyn4dNIUZ8US8NaPVXv06gkZFHaZnPfKWPDjRJjFRW3Y7WZ0jx72eT6zhw3VQlkMPysmXye8l35ewPHspKgbQ==}
     peerDependencies:
       react: ^18 || ^19
+
+  '@total-typescript/ts-reset@0.6.1':
+    resolution: {integrity: sha512-cka47fVSo6lfQDIATYqb/vO1nvFfbPw7uWLayIXIhGETj0wcOOlrlkobOMDNQOFr9QOafegUPq13V2+6vtD7yg==}
 
   '@trpc/client@11.0.0-rc.485':
     resolution: {integrity: sha512-Ld1gQjdYyrku0rjP/4QMg/SdsKgujr0P5XNoWkCyPRjdw3PuJbZFebauQPRC17cbbqGcpJrR+T3vnkhjMb1sgw==}
@@ -2139,6 +2145,8 @@ snapshots:
     dependencies:
       '@tanstack/query-core': 5.52.0
       react: 18.3.1
+
+  '@total-typescript/ts-reset@0.6.1': {}
 
   '@trpc/client@11.0.0-rc.485(@trpc/server@11.0.0-rc.485)':
     dependencies:
