@@ -3,7 +3,7 @@ import { env } from "~/env";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-export const OMDBAPI = {
+const OMDBAPI = {
   baseUrl: "https://www.omdbapi.com/",
   params: {
     apikey: env.OMDB_API_KEY,
@@ -38,9 +38,7 @@ export const movieRouter = createTRPCRouter({
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const res = await response.json();
-      const parsed = OMDBMovieDetails.parse(res);
-      console.log(parsed);
-      return parsed;
+      return OMDBMovieDetails.parse(res);
     }),
 });
 
