@@ -9,6 +9,9 @@ const config = {
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
+  images: {
+    domains: ["m.media-amazon.com"],
+  },
 };
 
 export default config;

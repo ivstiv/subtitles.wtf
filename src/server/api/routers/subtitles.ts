@@ -40,10 +40,6 @@ export const subtitlesRouter = createTRPCRouter({
       }
       const res = (await response.json()) as OpenSubtitlesResponse;
 
-      // res.data.sort(
-      //   (a, b) => b.attributes.download_count - a.attributes.download_count,
-      // );
-
       return res;
     }),
 
