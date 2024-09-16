@@ -19,40 +19,49 @@
     "ci-check": "prettier --check --ignore-unknown . && tsc --noEmit && eslint --max-warnings=0 ."
   },
   "dependencies": {
-    "@mantine/core": "^7.12.1",
-    "@mantine/form": "^7.12.1",
-    "@mantine/hooks": "^7.12.1",
-    "@t3-oss/env-nextjs": "^0.10.1",
-    "@tabler/icons-react": "^3.12.0",
-    "@tanstack/react-query": "^5.50.0",
-    "@trpc/client": "^11.0.0-rc.446",
-    "@trpc/react-query": "^11.0.0-rc.446",
-    "@trpc/server": "^11.0.0-rc.446",
-    "geist": "^1.3.0",
-    "next": "^14.2.4",
+    "@mantine/core": "^7.12.2",
+    "@mantine/form": "^7.12.2",
+    "@mantine/hooks": "^7.12.2",
+    "@t3-oss/env-nextjs": "^0.11.1",
+    "@tabler/icons-react": "^3.17.0",
+    "@tanstack/react-query": "^5.56.2",
+    "@trpc/client": "11.0.0-rc.502",
+    "@trpc/react-query": "11.0.0-rc.502",
+    "@trpc/server": "11.0.0-rc.502",
+    "geist": "^1.3.1",
+    "next": "^14.2.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "server-only": "^0.0.1",
     "sharp": "^0.33.5",
     "superjson": "^2.2.1",
-    "zod": "^3.23.3"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.14.10",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.6",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.1.0",
-    "@typescript-eslint/parser": "^8.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.6.0",
+    "@typescript-eslint/parser": "^8.6.0",
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.4",
+    "eslint-config-next": "^14.2.11",
     "eslint-config-prettier": "^9.1.0",
-    "postcss": "^8.4.41",
+    "postcss": "^8.4.47",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
     "prettier": "3.3.3",
-    "typescript": "^5.5.3"
+    "typescript": "^5.6.2"
+  },
+  "pnpm": {
+    "updateConfig": {
+      "ignoreDependencies": [
+        "eslint",
+        "@types/eslint",
+        "@types/node"
+      ]
+    }
   },
   "ct3aMetadata": {
     "initVersion": "7.37.0"
