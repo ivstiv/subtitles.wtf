@@ -10,7 +10,13 @@ const config = {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
   images: {
-    domains: ["m.media-amazon.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "m.media-amazon.com",
+        pathname: "**",
+      },
+    ],
   },
 };
 
